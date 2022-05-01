@@ -1,35 +1,37 @@
 import java.io.IOException;
 import java.util.Scanner;
+
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Write your data here");
         String number = sc.nextLine();
-        String operation ="";
-        String output ="";
-        int length =number.length();
-        switch (length) {
-            case 1, 2 -> throw new RuntimeException("It's not a math operation!");
-            default -> {
-            }
+        String operation = "";
+        int length = number.length();
+        if (length < 5) {
+            throw new RuntimeException("It's not a math operation");
         }
         String[] numbers = number.split(" ");
         String str = numbers[0];
         String str1 = numbers[2];
-        boolean b = (str.equals("1")) || str.equals("2") || str.equals("3") || str.equals("4") || str.equals("5") || str.equals("6") || str.equals("7") || str.equals("8") ||
-                str.equals("9") || str.equals("10");
-        if  (numbers.length > 3) {
+        boolean b = ((str.equals("1")) || str.equals("2") || str.equals("3") || str.equals("4") || str.equals("5") || str.equals("6") || str.equals("7") || str.equals("8") ||
+                str.equals("9") || str.equals("10"));
+        boolean r = (str1.equals("I") || str1.equals("II") || str1.equals("III") || str1.equals("IV") || str1.equals("V") || str1.equals("VI") || str1.equals("VII") ||
+                str1.equals("VIII") || str1.equals("IX") || str1.equals("X"));
+        boolean l = (str.equals("I") || str.equals("II") || str.equals("III") || str.equals("IV") || str.equals("V") || str.equals("VI") ||
+                str.equals("VII") || str.equals("VIII") || str.equals("IX") || str.equals("X"));
+        boolean o = (str1.equals("1") || str1.equals("2") || str1.equals("3") || str1.equals("4") ||
+                str.equals("5") || str.equals("6") || str.equals("7") || str.equals("8") ||
+                str1.equals("9") || str1.equals("10"));
+
+        if (numbers.length > 3) {
             try {
                 throw new IOException();
             } catch (IOException e) {
                 System.out.println("The format of maths operation isn't according to the task!");
             }
 
-        } else if (b && (str1.equals("I") || str1.equals("II") || str1.equals("III") || str1.equals("IV") || str1.equals("V") || str1.equals("VI") ||
-                str1.equals("VII") || str1.equals("VIII") || str1.equals("IX") || str1.equals("X")) || (str1.equals("1") || str1.equals("2") || str1.equals("3") || str1.equals("4") ||
-                str.equals("5") || str.equals("6") || str.equals("7") || str.equals("8") ||
-                str1.equals("9") || str1.equals("10")) && (str.equals("I") || str.equals("II") || str.equals("III") || str.equals("IV") || str.equals("V") || str.equals("VI") ||
-                str.equals("VII") || str.equals("VIII") || str.equals("IX") || str.equals("X"))) {
+        } else if ((b && r) || (l && o)) {
             try {
                 throw new IOException();
             } catch (IOException e) {
@@ -39,30 +41,23 @@ public class Main {
         } else if (b) {
             int x = Integer.parseInt(str);
             int y = Integer.parseInt(str1);
-            int res=0;
-            if (x > 0 && x < 11 && y > 0 && y < 11 && number.indexOf('+') > 0) {
-                operation ="+";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
+            int res = 0;
+            if (number.indexOf('+') > 0) {
+                operation = "+";
+                res = Calc(x, y, operation);
                 System.out.println(res);
-            } else if (x > 0 && y > 0 && x < 11 && y < 11 && number.indexOf('-') > 0) {
-                //               System.out.println(c = x - y);
-                operation ="-";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
+            } else if (number.indexOf('-') > 0) {
+                operation = "-";
+                res = Calc(x, y, operation);
                 System.out.println(res);
 
-            } else if (x > 0 && y > 0 && x < 11 && y < 11 && number.indexOf('*') > 0) {
-//                System.out.println(c = x * y);
-                operation ="*";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
+            } else if (number.indexOf('*') > 0) {
+                operation = "*";
+                res = Calc(x, y, operation);
                 System.out.println(res);
-            } else if (x > 0 && y > 0 && x < 11 && y < 11 && number.indexOf('/') > 0) {
-//                System.out.println(c = x / y);
-                operation ="/";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
+            } else if (number.indexOf('/') > 0) {
+                operation = "/";
+                res = Calc(x, y, operation);
                 System.out.println(res);
 
             } else
@@ -73,7 +68,7 @@ public class Main {
             String n = numbers[2];
             int x = 0;
             int y = 0;
-            int res=0;
+            int res = 0;
             switch (m) {
                 case "I":
                     x = I;
@@ -160,35 +155,31 @@ public class Main {
                 } catch (IOException ex) {
                     System.out.println("Roman numbers can't be negative");
                 }
-            }else if (number.indexOf('/') > 0 && x<y) {
+            } else if (number.indexOf('/') > 0 && x < y) {
                 try {
                     throw new IOException();
                 } catch (IOException e) {
                     System.out.println("There is no null in roman");
                 }
             } else if (number.indexOf('+') > 0) {
-                operation ="+";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
-                String result=integerToRoman(res);
+                operation = "+";
+                res = Calc(x, y, operation);
+                String result = integerToRoman(res);
                 System.out.println(result);
-            } else if ( number.indexOf('-') > 0) {
-                operation ="-";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
-                String result=integerToRoman(res);
+            } else if (number.indexOf('-') > 0) {
+                operation = "-";
+                res = Calc(x, y, operation);
+                String result = integerToRoman(res);
                 System.out.println(result);
-            } else if ( number.indexOf('*') > 0) {
-                operation ="*";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
-                String result=integerToRoman(res);
+            } else if (number.indexOf('*') > 0) {
+                operation = "*";
+                res = Calc(x, y, operation);
+                String result = integerToRoman(res);
                 System.out.println(result);
             } else if (number.indexOf('/') > 0) {
-                operation ="/";
-                res = Calc(x,y,operation);
-                output = String.valueOf(res);
-                String result=integerToRoman(res);
+                operation = "/";
+                res = Calc(x, y, operation);
+                String result = integerToRoman(res);
                 System.out.println(result);
             } else if (number.indexOf('/') == 0 && number.indexOf('*') == 0 && number.indexOf('+') == 0 && number.indexOf('/') == 0) {
                 try {
@@ -210,9 +201,6 @@ public class Main {
     private static final int VIII = 8;
     private static final int IX = 9;
     private static final int X = 10;
-
-
-
 
 
     private static final String[] numerals = new String[]{"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
@@ -243,7 +231,7 @@ public class Main {
                 case "/" -> res = x / y;
             }
 
-        }catch (ArithmeticException e){
+        } catch (ArithmeticException e) {
             System.out.println("throws Exception: деление на ноль");
         }
 
