@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Write your data here");
+        System.out.println("Enter your math operation, using Arabic or Roman numbers 1-10, there should be spaces between the numbers and the signs.");
         String number = sc.nextLine();
         String operation = "";
         int length = number.length();
